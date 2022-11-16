@@ -6,7 +6,7 @@ import '../api/api_manager.dart';
 class LogInAPI extends ApiManager {
   @override
   String apiUrl() {
-    return "http://192.168.0.102:8000/api/users/login";
+    return "http://192.168.1.112:8000/api/users/login";
   }
 
   @override

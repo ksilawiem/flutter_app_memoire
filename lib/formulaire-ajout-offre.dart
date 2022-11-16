@@ -1,10 +1,10 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:app_flutter_memoir/page/profil_candidat.dart';
 import 'package:app_flutter_memoir/page/test.dart';
 import 'package:http/http.dart' as http;
 
 import 'page/delayed_animation.dart';
-import 'request/offreCreate-api.dart';
+import 'request/offre-api.dart';
 
 //import 'package:file_picker/file_picker.dart';
 //import 'package:open_file/open_file.dart';
@@ -130,15 +130,31 @@ class AjoutOffre extends StatelessWidget {
                     ),
                   ),
                   DelayedAnimation(
-                    delay: 3500,
-                    child: TextField(
-                      controller: logoController,
-                      decoration: InputDecoration(
-                        labelText: 'Logo',
-                        labelStyle: TextStyle(
-                          color: Colors.grey[400],
+                    delay: 5500,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        primary: Color.fromARGB(255, 28, 13, 248),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 125,
+                          vertical: 13,
                         ),
                       ),
+                      child: Text(
+                        'Logo',
+                      ),
+                      onPressed: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['png'],
+                        );
+                        if (result == null) {
+                          return;
+                        }
+                        final file = result.files.first;
+                        print(file.name);
+                      },
                     ),
                   ),
                 ],
@@ -167,7 +183,7 @@ class AjoutOffre extends StatelessWidget {
                   ),*/
                 ),
                 onPressed: () async {
-                  OffreCreateAPI offreCreateAPI = OffreCreateAPI();
+                  OffreAPI offreCreateAPI = OffreAPI();
                   offreCreateAPI.post({
                     "name": nameController.text,
                     "address": addressController.text,

@@ -1,14 +1,58 @@
-import 'package:app_flutter_memoir/page/listTest.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/Domaine_model.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/Formation_Model.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/exp%C3%A9rience_Model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import 'package:app_flutter_memoir/page/listeCandidat.dart';
-
+import '../api_models/Profil_Models/Formation_Model.dart';
+import '../api_models/infoRecruteur_Mole.dart';
+import '../api_models/Profil_Models/informationCandidat_Model.dart';
+import '../request/Competence_api.dart';
+import '../request/experience_Apil.dart';
+import '../request/formation_api.dart';
+import '../request/informationC_api.dart';
+import '../request/informationR_api.dart';
+import 'ListeCategories.dart';
+import 'Mes candidature.dart';
+import 'SettingPage.dart';
+import 'listTest.dart';
+import 'liste_offre.dart';
 import 'login.dart';
-//import 'package:google_fonts/google_fonts.dart';
 
-class Profil_recrut extends StatelessWidget {
-  final double coverHeight = 280;
-  final double profileHeight = 144;
+class Profilerecruteur extends StatefulWidget {
+  @override
+  State<Profilerecruteur> createState() => _ProfilerecruteurState();
+}
+
+class _ProfilerecruteurState extends State<Profilerecruteur> {
+  TextEditingController mailController = TextEditingController();
+  TextEditingController NameController = TextEditingController();
+  TextEditingController entrepriseController = TextEditingController();
+  TextEditingController linkdinController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
+
+  @override
+  FormationRecruModel? formationRecruModel;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    InformationRAPI informationRAPI = InformationRAPI();
+    informationRAPI.userId = "34";
+    informationRAPI.getData().then((value) {
+      formationRecruModel = value as FormationRecruModel;
+      NameController.text =
+          formationRecruModel!.firstName! + formationRecruModel!.lastName!;
+      mailController.text = formationRecruModel!.email!;
+
+      entrepriseController.text = formationRecruModel!.address!;
+      linkdinController.text = formationRecruModel!.linkedin!;
+      twitterController.text = formationRecruModel!.twitter!;
+
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +81,6 @@ class Profil_recrut extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 73),
               child: Column(
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          // builder: (context) => SocialPage(),
-                          builder: (context) => ListTest(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Home',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      TextButton(
-                        child: const Text(
-                          'Sign in',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              // builder: (context) => SocialPage(),
-                              builder: (context) => Login(),
-                            ),
-                          );
-                          //signup screen
-                        },
-                      )
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -89,12 +97,11 @@ class Profil_recrut extends StatelessWidget {
                     height: 22,
                   ),
                   Container(
-                    height: height * 0.43,
+                    height: height * 0.30,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
                         double innerWidth = constraints.maxWidth;
-                        var AntDesign;
                         return Stack(
                           fit: StackFit.expand,
                           children: [
@@ -103,70 +110,28 @@ class Profil_recrut extends StatelessWidget {
                               left: 0,
                               right: 0,
                               child: Container(
-                                height: innerHeight * 0.72,
+                                height: innerHeight * 0.35,
                                 width: innerWidth,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(40),
                                   color: Colors.white,
                                 ),
                                 child: Column(
                                   children: [
                                     SizedBox(
-                                      height: 80,
+                                      height: 5,
                                     ),
-                                    Text(
-                                      'Sarra Sassi',
+                                    TextField(
+                                      controller: NameController,
                                       style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
                                         fontFamily: 'Nunito',
-                                        fontSize: 37,
+                                        fontSize: 35,
                                       ),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Mes offres',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            Text(
-                                              '10',
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    39, 105, 171, 1),
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 25,
-                                            vertical: 8,
-                                          ),
-                                          child: Container(
-                                            height: 50,
-                                            width: 3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
                                   ],
                                 ),
                               ),
@@ -181,18 +146,15 @@ class Profil_recrut extends StatelessWidget {
                               ),
                             ),
                             Positioned(
-                              top: 70,
-                              left: 140,
-                              right: 140,
+                              top: 0,
+                              left: 0,
+                              right: 0,
                               child: Center(
                                 child: Container(
-                                  height: height * 0.1,
-                                  width: width * 0.2,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('images/yoga_2.png'),
-                                      fit: BoxFit.cover,
-                                    ),
+                                  child: Image.asset(
+                                    'images/candidat.png',
+                                    width: innerWidth * 0.45,
+                                    fit: BoxFit.fitWidth,
                                   ),
                                 ),
                               ),
@@ -203,7 +165,7 @@ class Profil_recrut extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 5,
                   ),
                   Container(
                     height: height * 0.5,
@@ -216,11 +178,8 @@ class Profil_recrut extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 20,
-                          ),
                           Text(
-                            'Mon profil',
+                            'Mes informations ',
                             style: TextStyle(
                               color: Color.fromRGBO(39, 105, 171, 1),
                               fontSize: 27,
@@ -233,29 +192,175 @@ class Profil_recrut extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(30),
+                          TextField(
+                            style: TextStyle(color: Color(0xFF000000)),
+                            controller: NameController,
+                            cursorColor: Color(0xFF9b9b9b),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.account_circle,
+                                color: Colors.grey,
+                              ),
+                              hintText: "Name",
+                              hintStyle: TextStyle(
+                                  color: Color(0xFF9b9b9b),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
                             ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(30),
+                          TextField(
+                            style: TextStyle(color: Color(0xFF000000)),
+                            controller: mailController,
+                            cursorColor: Color(0xFF9b9b9b),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.grey,
+                              ),
+                              hintText: "Email",
+                              hintStyle: TextStyle(
+                                  color: Color(0xFF9b9b9b),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
                             ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            style: TextStyle(color: Color(0xFF000000)),
+                            controller: entrepriseController,
+                            cursorColor: Color(0xFF9b9b9b),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.account_circle,
+                                color: Colors.grey,
+                              ),
+                              hintText: "Entreprise	",
+                              hintStyle: TextStyle(
+                                  color: Color(0xFF9b9b9b),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            style: TextStyle(color: Color(0xFF000000)),
+                            controller: linkdinController,
+                            cursorColor: Color(0xFF9b9b9b),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.account_circle,
+                                color: Colors.grey,
+                              ),
+                              hintText: "LinkdIn	",
+                              hintStyle: TextStyle(
+                                  color: Color(0xFF9b9b9b),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            style: TextStyle(color: Color(0xFF000000)),
+                            controller: twitterController,
+                            cursorColor: Color(0xFF9b9b9b),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              /* prefixIcon: Icon(
+                                Icons.LinkdIn,
+                                color: Colors.grey,
+                              ),*/
+                              hintText: "Twitter	",
+                              hintStyle: TextStyle(
+                                  color: Color(0xFF9b9b9b),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
+            ),
+          ),
+          drawer: Drawer(
+            // Add a ListView to the drawer. This ensures the user can scroll
+            // through the options in the drawer if there isn't enough vertical
+            // space to fit everything.
+            child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Text('JobSeeker'),
+                ),
+                ListTile(
+                  title: const Text('offres'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => ListOffre()));
+                  },
+                ),
+                ListTile(
+                  title: const Text('Settings'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => SettingsPage()));
+                  },
+                ),
+                ListTile(
+                  title: const Text('My candidats'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => candi()));
+                  },
+                ),
+                ListTile(
+                  title: const Text('catégories'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => List_categories()));
+                  },
+                ),
+                ListTile(
+                  title: const Text('logout'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => Login()));
+                  },
+                ),
+              ],
             ),
           ),
         )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/SettingPage.dart';
-import 'package:app_flutter_memoir/page/profil_candidat.dart';
+
+import 'profilCan.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -22,10 +23,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => Profil_candidat()));
+                builder: (BuildContext context) => ProfileScreen()));
           },
         ),
-        actions: [
+        /* actions: [
           IconButton(
             icon: Icon(
               Icons.settings,
@@ -36,7 +37,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   builder: (BuildContext context) => SettingsPage()));
             },
           ),
-        ],
+        ],*/
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),

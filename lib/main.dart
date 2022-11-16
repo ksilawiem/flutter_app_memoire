@@ -1,11 +1,11 @@
+import 'package:app_flutter_memoir/page/ListeCategories.dart';
 import 'package:app_flutter_memoir/page/SettingPage.dart';
 import 'package:app_flutter_memoir/page/login.dart';
-import 'package:app_flutter_memoir/page/profil_candidat.dart';
 import 'package:app_flutter_memoir/page/test.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/welcome_page.dart';
 
-import 'drawer_item.dart';
+import 'page/listTest.dart';
 
 const d_red = const Color(0xFFE9717D);
 

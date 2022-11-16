@@ -1,6 +1,5 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:app_flutter_memoir/page/profil_candidat.dart';
 import '../api_models/inscript_candi_model.dart';
 import '../request/inscrit_candi_api.dart';
 import 'delayed_animation.dart';

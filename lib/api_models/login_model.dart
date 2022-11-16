@@ -38,14 +38,13 @@ class User {
   String? cv;
   String? photo;
   String? company;
-  Null? modePaiment;
+  String? modePaiment;
   String? linkedin;
   Null? twitter;
-  Null? dBut;
-  Null? fin;
+  String? dBut;
+  String? fin;
   String? createdAt;
   String? updatedAt;
-
   User(
       {this.id,
       this.firstName,

@@ -1,14 +1,102 @@
-import 'package:app_flutter_memoir/page/test.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/Domaine_model.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/Formation_Model.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/exp%C3%A9rience_Model.dart';
+import 'package:app_flutter_memoir/api_models/Profil_Models/informationCandidat_Model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../formulaire-ajout-offre.dart';
+import '../api_models/Profil_Models/informationCandidat_Model.dart';
+import '../request/Competence_api.dart';
+import '../request/experience_Apil.dart';
+import '../request/formation_api.dart';
+import '../request/informationC_api.dart';
+import 'ListeCategories.dart';
 import 'Mes candidature.dart';
 import 'SettingPage.dart';
+import 'edit_profil.dart';
 import 'listTest.dart';
+import 'liste_offre.dart';
 import 'login.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  TextEditingController mailController = TextEditingController();
+  TextEditingController NameController = TextEditingController();
+  TextEditingController adressController = TextEditingController();
+  TextEditingController linkdinController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
+  TextEditingController diplomeController = TextEditingController();
+
+  TextEditingController institutionController = TextEditingController();
+
+  TextEditingController DateobtController = TextEditingController();
+  TextEditingController NcompetenceController = TextEditingController();
+  TextEditingController entrepriseController = TextEditingController();
+  TextEditingController PexperienceController = TextEditingController();
+
+  @override
+  InformationModel? informationModel;
+  DomainesModel? domainesModel;
+  ExperienceModel? experienceModel;
+  FormationModel? formationModel;
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    InformationAPI informationAPI = InformationAPI();
+    informationAPI.userId = "35";
+    informationAPI.getData().then((value) {
+      informationModel = value as InformationModel;
+
+      NameController.text =
+          informationModel!.firstName! + informationModel!.lastName!;
+
+      mailController.text = informationModel!.email!;
+      adressController.text = informationModel!.address!;
+      linkdinController.text = informationModel!.linkedin!;
+      twitterController.text = informationModel!.twitter!;
+
+      setState(() {});
+    });
+    FormationAPI formationAPI = FormationAPI();
+    FormationModel formationModel;
+    formationAPI.userId = "35";
+    formationAPI.getData().then((value) {
+      formationModel = value as FormationModel;
+      diplomeController.text = "${formationModel.formations?[0].name}";
+      institutionController.text = "${formationModel.formations?[0].institut}";
+      DateobtController.text = "${formationModel.formations?[0].formationDate}";
+
+      setState(() {});
+    });
+
+    ExperienceAPI experienceAPI = ExperienceAPI();
+    experienceAPI.userId = "35";
+    experienceAPI.getData().then((value) {
+      experienceModel = value as ExperienceModel;
+
+      entrepriseController.text = experienceModel!.experiences![0].enterprise!;
+      PexperienceController.text =
+          "${experienceModel?.experiences?[0].startedAt}/${experienceModel?.experiences?[0].endedAt}";
+
+      setState(() {});
+    });
+
+    DomaineAPI domaineAPI = DomaineAPI();
+    domaineAPI.userId = "35";
+    domaineAPI.getData().then((value) {
+      domainesModel = value as DomainesModel;
+
+      NcompetenceController.text = domainesModel!.domaines![0].name!;
+
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -52,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                     height: 22,
                   ),
                   Container(
-                    height: height * 0.38,
+                    height: height * 0.30,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         double innerHeight = constraints.maxHeight;
@@ -65,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
                               left: 0,
                               right: 0,
                               child: Container(
-                                height: innerHeight * 0.30,
+                                height: innerHeight * 0.35,
                                 width: innerWidth,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(40),
@@ -74,14 +162,15 @@ class ProfileScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     SizedBox(
-                                      height: 20,
+                                      height: 5,
+                                      width: width,
                                     ),
-                                    Text(
-                                      'Wiem ksila',
+                                    TextField(
+                                      controller: NameController,
                                       style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
                                         fontFamily: 'Nunito',
-                                        fontSize: 37,
+                                        fontSize: 35,
                                       ),
                                     ),
                                     SizedBox(
@@ -107,7 +196,7 @@ class ProfileScreen extends StatelessWidget {
                               child: Center(
                                 child: Container(
                                   child: Image.asset(
-                                    'images/candidat.png',
+                                    'images/1665749592568.jpg',
                                     width: innerWidth * 0.45,
                                     fit: BoxFit.fitWidth,
                                   ),
@@ -133,22 +222,6 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 0,
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                            onPressed: () async {
-                              Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => AjoutOffre()));
-                            },
-                          ),
                           Text(
                             'Mes informations ',
                             style: TextStyle(
@@ -165,8 +238,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: NameController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -186,8 +258,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: mailController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -207,8 +278,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: adressController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -228,8 +298,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: linkdinController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -249,8 +318,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: twitterController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -314,8 +382,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: diplomeController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -335,8 +402,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: institutionController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -356,8 +422,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: DateobtController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -421,8 +486,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: NcompetenceController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -483,8 +547,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: entrepriseController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -504,8 +567,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           TextField(
                             style: TextStyle(color: Color(0xFF000000)),
-
-                            // controller: mailController,
+                            controller: PexperienceController,
                             cursorColor: Color(0xFF9b9b9b),
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -546,8 +608,10 @@ class ProfileScreen extends StatelessWidget {
                   title: const Text('offres'),
                   onTap: () {
                     // Update the state of the app.
-                    Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => test()));
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => ListOffre()));
                   },
                 ),
                 ListTile(
@@ -557,7 +621,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => SettingsPage()));
+                            builder: (context) => EditProfilePage()));
                   },
                 ),
                 ListTile(
@@ -572,10 +636,20 @@ class ProfileScreen extends StatelessWidget {
                   title: const Text('My tests'),
                   onTap: () {
                     // Update the state of the app.
+                    /*   Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => List_Test()));*/
+                  },
+                ),
+                ListTile(
+                  title: const Text('catégories'),
+                  onTap: () {
+                    // Update the state of the app.
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => ListTest()));
+                            builder: (context) => List_categories()));
                   },
                 ),
                 ListTile(

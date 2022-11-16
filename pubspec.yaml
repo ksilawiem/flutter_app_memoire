@@ -45,6 +45,7 @@ dependencies:
   file_picker: ^4.5.1
   retrofit: ^3.0.1+1
   dio: ^4.0.6
+  font_awesome_flutter: ^10.2.1
 
 dev_dependencies:
   flutter_test:

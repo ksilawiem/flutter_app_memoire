@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:app_flutter_memoir/api_models/login_model.dart';
 import 'package:app_flutter_memoir/page/profilCan.dart';
-import 'package:app_flutter_memoir/page/profil_candidat.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/profil_recru.dart';
 import 'package:provider/provider.dart';
@@ -174,11 +173,19 @@ class _LogInState extends State<Login> {
                                       LoginModel loginModel = LoginModel();
                                       loginModel = value as LoginModel;
                                       print(loginModel.toJson());
-                                      Navigator.push(
-                                          context,
-                                          new MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileScreen()));
+                                      if (loginModel.user!.role == "condidat") {
+                                        Navigator.push(
+                                            context,
+                                            new MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProfileScreen()));
+                                      } else {
+                                        Navigator.push(
+                                            context,
+                                            new MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Profilerecruteur()));
+                                      }
                                     });
                                   },
                                 ),

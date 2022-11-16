@@ -4,6 +4,8 @@ import 'delayed_animation.dart';
 //import 'package:date_range_form_field/date_range_form_field.dart';
 import 'package:intl/intl.dart';
 
+import 'incription_recruteur.dart';
+
 class Carte_Bancaire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class Carte_Bancaire extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Profil_recrut(),
+                      builder: (context) => Profilerecruteur(),
                     ),
                   );
                 },

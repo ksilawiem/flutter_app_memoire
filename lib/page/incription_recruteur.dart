@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:app_flutter_memoir/page/modalite_pai.dart';
 
 import '../request/inscrit_candi_api.dart';
+import '../request/inscrit_recru_api.dart';
 import 'delayed_animation.dart';
 import 'package:http/http.dart' as http;
 
@@ -207,8 +208,8 @@ class Inscription_recuteur extends StatelessWidget {
                   ),*/
                 ),
                 onPressed: () async {
-                  InsCAPI insCAPI = InsCAPI();
-                  insCAPI.post({
+                  InsRecAPI insRecAPI = InsRecAPI();
+                  insRecAPI.post({
                     "email": EmailController.text,
                     "password": passwordController.text,
                     "firstName": FirstNameController.text,

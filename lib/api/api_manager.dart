@@ -16,13 +16,14 @@ abstract class ApiManager {
     AbstractJsonResource? json;
     var data;
     await dioSingleton.dio.get(apiUrl(), queryParameters: data).then((value) {
-      print(value.data["Status"]);
-      if (value.data["Status"] == false) {
-        Get.snackbar("Error", "${value.data["ErrorMessage"]}");
-      } else {
-        data = value.data;
-        json = fromJson(data);
-      }
+      //  if (value.data["Status"] == false) {
+      //   Get.snackbar("Error", "${value.data["ErrorMessage"]}");
+      // } else {
+
+      //   }
+      print(value);
+      data = value.data;
+      json = fromJson(data);
     });
 
     return json;

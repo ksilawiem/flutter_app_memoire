@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_flutter_memoir/Services/auth.dart';
 import 'package:app_flutter_memoir/page/login.dart';
+import 'package:flutter/material.dart';
+import 'package:app_flutter_memoir/page/offresDetails.dart';
 
 import 'SettingPage.dart';
-import 'offres.dart';
-import 'profil_candidat.dart';
+import 'profilCan.dart';
 
 class candi extends StatelessWidget {
   List img = [
@@ -101,7 +102,7 @@ class candi extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: names.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return FoodItemCard(
+                      return ItemCard(
                         name: names[index],
                         description: details[index],
                         imgPath: img[index],
@@ -152,7 +153,7 @@ class candi extends StatelessWidget {
                 Navigator.push(
                     context,
                     new MaterialPageRoute(
-                        builder: (context) => Profil_candidat()));
+                        builder: (context) => ProfileScreen()));
               },
             ),
             ListTile(
@@ -184,6 +185,109 @@ class candi extends StatelessWidget {
           ],
         ),
       ), // Populate the Drawer in the next step.
+    );
+  }
+}
+
+class ItemCard extends StatefulWidget {
+  final String name;
+  final String description;
+  final String imgPath;
+
+  const ItemCard(
+      {Key? key,
+      required this.name,
+      required this.description,
+      required this.imgPath})
+      : super(key: key);
+
+  @override
+  _ItemCardState createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => offresDetails(
+              name: widget.name,
+              image: widget.imgPath,
+              description: widget.description,
+            ),
+          ),
+        ),
+        child: Material(
+          borderRadius: BorderRadius.circular(15),
+          elevation: 8,
+          child: Container(
+            height: height * 0.2,
+            width: width * 0.5,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 80,
+                  left: 20,
+                  right: 10,
+                  child: Hero(
+                    tag: 'shadow${widget.imgPath}',
+                    child: Image.asset(
+                      widget.imgPath,
+                      fit: BoxFit.cover,
+                      color: Colors.black.withOpacity(0.3),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.name,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 17,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Hero(
+                        tag: 'image${widget.imgPath}',
+                        child: Image.asset(
+                          widget.imgPath,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: Icon(Icons.subdirectory_arrow_left),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
