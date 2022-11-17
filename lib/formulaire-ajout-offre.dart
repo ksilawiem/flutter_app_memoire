@@ -4,7 +4,8 @@ import 'package:app_flutter_memoir/page/test.dart';
 import 'package:http/http.dart' as http;
 
 import 'page/delayed_animation.dart';
-import 'request/offre-api.dart';
+import 'request/offres_req/Add_Offre_request.dart';
+import 'request/offres_req/offre-api.dart';
 
 //import 'package:file_picker/file_picker.dart';
 //import 'package:open_file/open_file.dart';
@@ -183,8 +184,8 @@ class AjoutOffre extends StatelessWidget {
                   ),*/
                 ),
                 onPressed: () async {
-                  OffreAPI offreCreateAPI = OffreAPI();
-                  offreCreateAPI.post({
+                  Add_OffreAPI add_OffreAPI = Add_OffreAPI();
+                  add_OffreAPI.post({
                     "name": nameController.text,
                     "address": addressController.text,
                     "telefone": telefoneController.text,

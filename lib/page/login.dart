@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../Services/globals.dart';
 import '../main.dart';
 import '../request/login_api.dart';
+import '../save/save.dart';
 import 'candi_recru.dart';
 import 'carte_bancaire.dart';
 import 'delayed_animation.dart';
@@ -173,6 +174,13 @@ class _LogInState extends State<Login> {
                                       LoginModel loginModel = LoginModel();
                                       loginModel = value as LoginModel;
                                       print(loginModel.toJson());
+
+                                      SecureStorage.writeSecureData(
+                                          key: SecureStorage.Token,
+                                          value: loginModel.token!);
+                                      SecureStorage.writeSecureDataINT(
+                                          key: SecureStorage.userId,
+                                          value: loginModel.user!.id!);
                                       if (loginModel.user!.role == "condidat") {
                                         Navigator.push(
                                             context,

@@ -10,6 +10,7 @@ import '../request/Competence_api.dart';
 import '../request/experience_Apil.dart';
 import '../request/formation_api.dart';
 import '../request/informationC_api.dart';
+import '../save/save.dart';
 import 'ListeCategories.dart';
 import 'Mes candidature.dart';
 import 'SettingPage.dart';
@@ -48,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
 
     InformationAPI informationAPI = InformationAPI();
-    informationAPI.userId = "35";
+    informationAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     informationAPI.getData().then((value) {
       informationModel = value as InformationModel;
 
@@ -64,7 +65,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
     FormationAPI formationAPI = FormationAPI();
     FormationModel formationModel;
-    formationAPI.userId = "35";
+    formationAPI.userId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+
     formationAPI.getData().then((value) {
       formationModel = value as FormationModel;
       diplomeController.text = "${formationModel.formations?[0].name}";
@@ -75,19 +78,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
 
     ExperienceAPI experienceAPI = ExperienceAPI();
-    experienceAPI.userId = "35";
+    experienceAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     experienceAPI.getData().then((value) {
       experienceModel = value as ExperienceModel;
 
-      entrepriseController.text = experienceModel!.experiences![0].enterprise!;
-      PexperienceController.text =
-          "${experienceModel?.experiences?[0].startedAt}/${experienceModel?.experiences?[0].endedAt}";
+      entrepriseController.text = experienceModel!.experiences![0].enterprise! +
+          "(" +
+          "${experienceModel?.experiences?[0].startedAt}/${experienceModel?.experiences?[0].endedAt}" +
+          ")";
+      // PexperienceController.text =
+      //    "${experienceModel?.experiences?[0].startedAt}/${experienceModel?.experiences?[0].endedAt}";
 
       setState(() {});
     });
 
     DomaineAPI domaineAPI = DomaineAPI();
-    domaineAPI.userId = "35";
+    domaineAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     domaineAPI.getData().then((value) {
       domainesModel = value as DomainesModel;
 

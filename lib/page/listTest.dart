@@ -23,6 +23,8 @@ class _ListTestState extends State<ListTest> {
     testCatAPI.categorieId = widget.cat;
     testCatAPI.getData().then((value) {
       testsModel = value as TestsModel;
+      print(value);
+      // testsModel = value as TestsModel;
       setState(() {});
     });
   }
@@ -36,7 +38,7 @@ class _ListTestState extends State<ListTest> {
                   child: CircularProgressIndicator(),
                 )
               : ListView.builder(
-                  itemCount: 10,
+                  itemCount: testsModel?.data1?.length,
                   itemBuilder: (context, pos) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -56,7 +58,8 @@ class _ListTestState extends State<ListTest> {
                                         BoxDecoration(border: Border.all()),
                                     child: Column(
                                       children: [
-                                        Text("Questions"),
+                                        Text(
+                                            "${testsModel?.data1?[pos].nbrQst}"),
                                         Text("$pos")
                                       ],
                                     ),
@@ -65,7 +68,10 @@ class _ListTestState extends State<ListTest> {
                               )),
                               Expanded(
                                   child: Column(
-                                children: [Text("Questions"), Text("$pos")],
+                                children: [
+                                  Text("${testsModel?.data1?[pos].name}"),
+                                  Text("$pos")
+                                ],
                               )),
                               Expanded(
                                   child: Column(

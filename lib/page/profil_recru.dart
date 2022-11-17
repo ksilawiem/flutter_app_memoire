@@ -1,6 +1,7 @@
 import 'package:app_flutter_memoir/api_models/Profil_Models/Domaine_model.dart';
 import 'package:app_flutter_memoir/api_models/Profil_Models/Formation_Model.dart';
 import 'package:app_flutter_memoir/api_models/Profil_Models/exp%C3%A9rience_Model.dart';
+import 'package:app_flutter_memoir/formulaire-ajout-offre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -332,6 +333,16 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                         context,
                         new MaterialPageRoute(
                             builder: (context) => SettingsPage()));
+                  },
+                ),
+                ListTile(
+                  title: const Text('Ajouter offre'),
+                  onTap: () {
+                    // Update the state of the app.
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => AjoutOffre()));
                   },
                 ),
                 ListTile(
