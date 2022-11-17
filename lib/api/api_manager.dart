@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:app_flutter_memoir/api/dio_singleton.dart';
 
+import '../save/save.dart';
 import 'abstract_json_resource.dart';
 
 abstract class ApiManager {
@@ -14,8 +15,18 @@ abstract class ApiManager {
 
   Future<AbstractJsonResource?> getData({data}) async {
     AbstractJsonResource? json;
+    String? token = SecureStorage.readSecureData(SecureStorage.Token);
+    Options options = Options(
+      headers: {
+        "Accept": "application/json",
+        'Content-Type': 'application/json',
+        "authorization": "Bearer ${token}"
+      },
+    );
     var data;
-    await dioSingleton.dio.get(apiUrl(), queryParameters: data).then((value) {
+    await dioSingleton.dio
+        .get(apiUrl(), queryParameters: data, options: options)
+        .then((value) {
       //  if (value.data["Status"] == false) {
       //   Get.snackbar("Error", "${value.data["ErrorMessage"]}");
       // } else {
@@ -33,11 +44,12 @@ abstract class ApiManager {
   Future<AbstractJsonResource?> post(Map dataToPost) async {
     AbstractJsonResource? jsonList;
     var data;
-
+    String? token = SecureStorage.readSecureData(SecureStorage.Token);
     Options options = Options(
       headers: {
         "Accept": "application/json",
         'Content-Type': 'application/json',
+        "authorization": "Bearer ${token}"
       },
     );
     print(dataToPost);

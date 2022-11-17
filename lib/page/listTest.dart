@@ -60,7 +60,7 @@ class _ListTestState extends State<ListTest> {
                                       children: [
                                         Text(
                                             "${testsModel?.data1?[pos].nbrQst}"),
-                                        Text("$pos")
+                                        Text("Question")
                                       ],
                                     ),
                                   )
@@ -70,7 +70,7 @@ class _ListTestState extends State<ListTest> {
                                   child: Column(
                                 children: [
                                   Text("${testsModel?.data1?[pos].name}"),
-                                  Text("$pos")
+                                  Text("${testsModel?.data1?[pos].description}")
                                 ],
                               )),
                               Expanded(

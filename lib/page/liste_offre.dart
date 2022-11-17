@@ -4,7 +4,13 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../api_models/Offre_Models/offre_model.dart';
+import '../api_models/login_model.dart';
 import '../request/offres_req/offre-api.dart';
+import 'ListeCategories.dart';
+import 'Mes candidature.dart';
+import 'login.dart';
+import 'profilCan.dart';
+import 'profil_recru.dart';
 
 class ListOffre extends StatefulWidget {
   const ListOffre({Key? key}) : super(key: key);
@@ -25,7 +31,8 @@ class _ListOffreState extends State<ListOffre> {
     offreAPI.getData().then((value) {
       _offreModel = value as OffreModel;
       print("OffreAPI");
-      print(value);
+      print(_offreModel?.toJson());
+      setState(() {});
     });
   }
 
@@ -159,6 +166,78 @@ class _ListOffreState extends State<ListOffre> {
                   ),
                 )
               ]),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('JobSeeker'),
+              ),
+              ListTile(
+                title: const Text('profil'),
+                onTap: () {
+                  // Update the state of the app.
+                  LoginModel loginModel = LoginModel();
+
+                  if (loginModel.user!.role == "condidat") {
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => ProfileScreen()));
+                  } else {
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => Profilerecruteur()));
+                  }
+                },
+              ),
+              ListTile(
+                title: const Text('List candidats'),
+                onTap: () {
+                  // Update the state of the app.
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) => candi()));
+                },
+              ),
+              ListTile(
+                title: const Text('My tests'),
+                onTap: () {
+                  // Update the state of the app.
+                  /*   Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => List_Test()));*/
+                },
+              ),
+              ListTile(
+                title: const Text('catégories'),
+                onTap: () {
+                  // Update the state of the app.
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => List_categories()));
+                },
+              ),
+              ListTile(
+                title: const Text('logout'),
+                onTap: () {
+                  // Update the state of the app.
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) => Login()));
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
