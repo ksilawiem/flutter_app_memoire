@@ -60,7 +60,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your name post';
+                        }
+                        return null;
+                      },
                       controller: nameController,
                       decoration: InputDecoration(
                         labelText: 'Nom de l offre',
@@ -72,7 +78,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter adresse';
+                        }
+                        return null;
+                      },
                       controller: addressController,
                       decoration: InputDecoration(
                         labelText: 'Adresse',
@@ -84,7 +96,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter number phone';
+                        }
+                        return null;
+                      },
                       controller: telefoneController,
                       decoration: InputDecoration(
                         labelText: 'Numéro de téléphone',
@@ -96,7 +114,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter catégorie';
+                        }
+                        return null;
+                      },
                       controller: categorieController,
                       decoration: InputDecoration(
                         labelText: 'Catégorie',
@@ -108,7 +132,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter description';
+                        }
+                        return null;
+                      },
                       controller: descriptionController,
                       decoration: InputDecoration(
                         labelText: 'Description',
@@ -120,7 +150,13 @@ class AjoutOffre extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter time';
+                        }
+                        return null;
+                      },
                       controller: tempsController,
                       decoration: InputDecoration(
                         labelText: 'Temps',

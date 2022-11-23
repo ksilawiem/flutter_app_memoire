@@ -65,7 +65,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your name';
+                        }
+                        return null;
+                      },
                       controller: FirstNameController,
                       decoration: InputDecoration(
                         labelText: 'Name',
@@ -77,7 +83,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your LastName';
+                        }
+                        return null;
+                      },
                       controller: LastNameController,
                       decoration: InputDecoration(
                         labelText: 'LastName',
@@ -89,7 +101,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your Email';
+                        }
+                        return null;
+                      },
                       controller: EmailController,
                       decoration: InputDecoration(
                         labelText: 'Email',
@@ -101,7 +119,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your Date';
+                        }
+                        return null;
+                      },
                       controller: dateController,
                       decoration: InputDecoration(
                         labelText: 'Date de naissance',
@@ -114,7 +138,13 @@ class Inscription_recuteur extends StatelessWidget {
                   SizedBox(height: 30),
                   DelayedAnimation(
                     delay: 4500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
                       controller: passwordController,
                       obscureText: _obscureText,
                       decoration: InputDecoration(
@@ -136,7 +166,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your adresse';
+                        }
+                        return null;
+                      },
                       controller: AdresseController,
                       decoration: InputDecoration(
                         labelText: 'Adresse',
@@ -148,7 +184,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your city';
+                        }
+                        return null;
+                      },
                       controller: cityController,
                       decoration: InputDecoration(
                         labelText: 'Ville',
@@ -160,7 +202,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Entreprise';
+                        }
+                        return null;
+                      },
                       controller: EntrepriseController,
                       decoration: InputDecoration(
                         labelText: 'Entreprise',
@@ -172,7 +220,13 @@ class Inscription_recuteur extends StatelessWidget {
                   ),
                   DelayedAnimation(
                     delay: 3500,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your gender';
+                        }
+                        return null;
+                      },
                       controller: genderController,
                       decoration: InputDecoration(
                         labelText: 'gender',

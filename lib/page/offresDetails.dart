@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:app_flutter_memoir/main.dart';
 
-import 'answer.dart';
 //import 'package:flutter_mentor_quiz_app_tut/quiz/home.dart';
 //import 'package:ss/quiz/quiz_screen.dart';
 
@@ -140,14 +139,7 @@ class _offresDetailsState extends State<offresDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QuizScreen(),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           child: const Text(
                             'Postuler',
                           ),

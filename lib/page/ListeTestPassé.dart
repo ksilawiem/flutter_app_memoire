@@ -3,26 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../api_models/Test_Models/TestPasse_Model.dart';
 import '../api_models/Test_Models/Liste_TestC_Model.dart';
-import '../request/Test_gratuit_req/testCatégorie_api.dart';
+import '../request/Test_gratuit_req/TestPasse_api.dart';
 
-class ListTest extends StatefulWidget {
+class ListTestPasse extends StatefulWidget {
   String cat;
-  ListTest({required this.cat});
+  ListTestPasse({required this.cat});
   @override
-  State<ListTest> createState() => _ListTestState();
+  State<ListTestPasse> createState() => _ListTestPasseState();
 }
 
-class _ListTestState extends State<ListTest> {
-  TestsModel? testsModel;
+class _ListTestPasseState extends State<ListTestPasse> {
+  TestPasse_Model? testPasse_Model;
   @override
   void initState() {
     super.initState();
 
-    TestCatAPI testCatAPI = TestCatAPI();
-    testCatAPI.categorieId = widget.cat;
-    testCatAPI.getData().then((value) {
-      testsModel = value as TestsModel;
+    TestPasseAPI testPasseAPI = TestPasseAPI();
+    testPasseAPI.userId = widget.cat;
+    testPasseAPI.getData().then((value) {
+      testPasse_Model = value as TestPasse_Model;
       print(value);
       // testsModel = value as TestsModel;
       setState(() {});
@@ -33,36 +34,19 @@ class _ListTestState extends State<ListTest> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: testsModel == null
+          body: testPasse_Model == null
               ? Center(
                   child: CircularProgressIndicator(),
                 )
               : ListView.builder(
-                  itemCount: testsModel?.data1?.length,
+                  itemCount: testPasse_Model?.tooks?.length,
                   itemBuilder: (context, pos) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
                           elevation: 8,
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            // decoration: BoxDecoration(border: Border.all()),
+                            decoration: BoxDecoration(border: Border.all()),
                             child: Row(children: [
                               Expanded(
                                   child: Column(
@@ -76,7 +60,7 @@ class _ListTestState extends State<ListTest> {
                                     child: Column(
                                       children: [
                                         Text(
-                                            "${testsModel?.data1?[pos].nbrQst}"),
+                                            "${testPasse_Model?.tooks?[pos].testId}"),
                                         Text("Question")
                                       ],
                                     ),
@@ -86,11 +70,12 @@ class _ListTestState extends State<ListTest> {
                               Expanded(
                                   child: Column(
                                 children: [
-                                  Text("${testsModel?.data1?[pos].name}"),
-                                  Text("${testsModel?.data1?[pos].description}")
+                                  Text("${testPasse_Model?.tooks?[pos].score}"),
+                                  Text(
+                                      "${testPasse_Model?.tooks?[pos].startedAt}")
                                 ],
                               )),
-                              Expanded(
+                              /*      Expanded(
                                   child: Column(
                                 children: [
                                   Container(
@@ -103,7 +88,7 @@ class _ListTestState extends State<ListTest> {
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.end,
-                              ))
+                              ))*/
                             ]),
                           )),
                     );

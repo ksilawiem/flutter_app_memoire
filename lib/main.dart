@@ -5,6 +5,9 @@ import 'package:app_flutter_memoir/page/test.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/welcome_page.dart';
 import 'package:get_storage/get_storage.dart';
+import 'page/Add_test.dart';
+import 'page/ListeTestPassé.dart';
+import 'page/Offre_Postuler.dart';
 import 'page/listTest.dart';
 
 const d_red = Color.fromARGB(255, 97, 62, 65);
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomePage(),
+      home: AddTest(),
     );
   }
 }

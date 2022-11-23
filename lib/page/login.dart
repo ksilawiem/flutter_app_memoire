@@ -79,7 +79,13 @@ class _LogInState extends State<Login> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             /////////////  Email//////////////
-                            TextField(
+                            TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your Email';
+                                }
+                                return null;
+                              },
                               style: TextStyle(color: Color(0xFF000000)),
                               controller: mailController,
                               cursorColor: Color(0xFF9b9b9b),
@@ -98,7 +104,13 @@ class _LogInState extends State<Login> {
                             ),
 
                             /////////////// password////////////////////
-                            TextField(
+                            TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
                               style: TextStyle(color: Color(0xFF000000)),
                               cursorColor: Color(0xFF9b9b9b),
                               controller: passwordController,

@@ -12,7 +12,8 @@ import '../request/formation_api.dart';
 import '../request/informationC_api.dart';
 import '../save/save.dart';
 import 'ListeCategories.dart';
-import 'Mes candidature.dart';
+import 'ListeTestPassé.dart';
+import 'Offre_Postuler.dart';
 import 'SettingPage.dart';
 import 'edit_profil.dart';
 import 'listTest.dart';
@@ -49,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
 
     InformationAPI informationAPI = InformationAPI();
-    informationAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+    informationAPI.userId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     informationAPI.getData().then((value) {
       informationModel = value as InformationModel;
 
@@ -78,7 +80,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
 
     ExperienceAPI experienceAPI = ExperienceAPI();
-    experienceAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+    experienceAPI.userId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     experienceAPI.getData().then((value) {
       experienceModel = value as ExperienceModel;
 
@@ -93,7 +96,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
 
     DomaineAPI domaineAPI = DomaineAPI();
-    domaineAPI.userId = SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+    domaineAPI.userId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     domaineAPI.getData().then((value) {
       domainesModel = value as DomainesModel;
 
@@ -634,18 +638,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: const Text('My candidats'),
                   onTap: () {
                     // Update the state of the app.
-                    Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => candi()));
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => Mes_candidatures(
+                                //    cat: '',
+                                )));
                   },
                 ),
                 ListTile(
                   title: const Text('My tests'),
                   onTap: () {
                     // Update the state of the app.
-                    /*   Navigator.push(
+                    Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => List_Test()));*/
+                            builder: (context) => ListTestPasse(
+                                  cat: informationModel!.firstName!.toString(),
+                                )));
                   },
                 ),
                 ListTile(

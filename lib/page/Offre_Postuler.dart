@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../api_models/Categorie_Model.dart';
-import '../request/categorie_api.dart';
-import 'listTest.dart';
+import '../api_models/Profil_Models/Mescandidature_Model.dart';
+import '../request/offres_req/ListOffre_Postuler_API.dart';
 
-class List_categories extends StatefulWidget {
-  const List_categories({Key? key}) : super(key: key);
+class Mes_candidatures extends StatefulWidget {
+  const Mes_candidatures({Key? key}) : super(key: key);
 
   @override
-  State<List_categories> createState() => _List_categoriesState();
+  State<Mes_candidatures> createState() => _Mes_candidaturesState();
 }
 
-class _List_categoriesState extends State<List_categories> {
-  CategoriesModel? _categoriesModel;
+class _Mes_candidaturesState extends State<Mes_candidatures> {
+  Offre_PostulerModel? _offre_PostulerModel;
 
   @override
   void initState() {
     super.initState();
 
-    CategorieAPI categorieAPI = CategorieAPI();
-    categorieAPI.getData().then((value) {
-      _categoriesModel = value as CategoriesModel;
+    Offre_PostulerAPI offre_PostulerAPI = Offre_PostulerAPI();
+    offre_PostulerAPI.getData().then((value) {
+      _offre_PostulerModel = value as Offre_PostulerModel;
 
       setState(() {});
     });
@@ -34,15 +33,7 @@ class _List_categoriesState extends State<List_categories> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            // height: 30,
-            // width: width,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 221, 223, 235),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-              ),
-            ),
-            // decoration: BoxDecoration(border: Border.all()),
+            decoration: BoxDecoration(border: Border.all()),
             height: 50,
             child: TextFormField(
               style: TextStyle(color: Colors.black),
@@ -50,14 +41,14 @@ class _List_categoriesState extends State<List_categories> {
               //validator: controller.nameValidator,controller:controller.username,
               decoration: InputDecoration(
                 icon: Icon(Icons.search_rounded),
-                hintText: "search ",
+                hintText: " ",
                 filled: true,
                 border: InputBorder.none,
                 errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       20,
                     ),
-                    borderSide: BorderSide(color: Colors.blue)),
+                    borderSide: BorderSide(color: Colors.grey)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       20,
@@ -71,55 +62,48 @@ class _List_categoriesState extends State<List_categories> {
           ),
         ),
         Expanded(
-            child: _categoriesModel == null
+            child: _offre_PostulerModel == null
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
-                    itemCount: _categoriesModel?.data?.length,
+                    itemCount: _offre_PostulerModel?.posts?.length,
                     itemBuilder: (context, pos) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           elevation: 8,
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
                             height: 100,
                             child: Column(children: [
                               Text(
-                                "${_categoriesModel?.data?[pos].nom}",
+                                "${_offre_PostulerModel?.posts?[pos].offreId}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
-                              GestureDetector(
-                                onTap: () {
+                              Text(
+                                "${_offre_PostulerModel?.posts?[pos].score}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              Text(
+                                "${_offre_PostulerModel?.posts?[pos].userId}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              /* GestureDetector(
+                                   onTap: () {
                                   Navigator.push(
                                       context,
                                       new MaterialPageRoute(
                                           builder: (context) => ListTest(
-                                                cat: _categoriesModel!
+                                                cat: _offre_PostulerModel!
                                                     .data![pos].id
                                                     .toString(),
                                               )));
 //ListTest(cat: _categoriesModel?.data?[pos].id,)
-                                },
-                                child: Container(
+                                },*/
+                              /* child: Container(
                                   height: 40,
                                   width: 120,
                                   decoration: BoxDecoration(
@@ -128,7 +112,7 @@ class _List_categoriesState extends State<List_categories> {
                                   child:
                                       Center(child: Text("Accéder aux tests")),
                                 ),
-                              )
+                                  )*/
                             ]),
                           ),
                         ),

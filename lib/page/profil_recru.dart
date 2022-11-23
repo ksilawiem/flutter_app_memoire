@@ -14,7 +14,7 @@ import '../request/formation_api.dart';
 import '../request/informationC_api.dart';
 import '../request/informationR_api.dart';
 import 'ListeCategories.dart';
-import 'Mes candidature.dart';
+import 'Offre_Postuler.dart';
 import 'SettingPage.dart';
 import 'listTest.dart';
 import 'liste_offre.dart';
@@ -347,11 +347,11 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                 ),
                 ListTile(
                   title: const Text('My candidats'),
-                  onTap: () {
+                  /* onTap: () {
                     // Update the state of the app.
                     Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => candi()));
-                  },
+                        new MaterialPageRoute(builder: (context) => Mes_candidatures()));
+                  },*/
                 ),
                 ListTile(
                   title: const Text('catégories'),

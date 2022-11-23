@@ -7,7 +7,7 @@ import '../api_models/Offre_Models/offre_model.dart';
 import '../api_models/login_model.dart';
 import '../request/offres_req/offre-api.dart';
 import 'ListeCategories.dart';
-import 'Mes candidature.dart';
+import 'Offre_Postuler.dart';
 import 'login.dart';
 import 'profilCan.dart';
 import 'profil_recru.dart';
@@ -201,11 +201,11 @@ class _ListOffreState extends State<ListOffre> {
               ),
               ListTile(
                 title: const Text('List candidats'),
-                onTap: () {
+                /* onTap: () {
                   // Update the state of the app.
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) => candi()));
-                },
+                },*/
               ),
               ListTile(
                 title: const Text('My tests'),
