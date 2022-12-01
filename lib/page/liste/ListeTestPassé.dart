@@ -1,44 +1,46 @@
-import 'package:app_flutter_memoir/save/save.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-import '../api_models/Offre_Models/OffrePostulerModel.dart';
-import '../api_models/Offre_Models/offre_model.dart';
-import '../api_models/Profil_Models/Mescandidature_Model.dart';
-import '../request/offres_req/ListOffre_Postuler_API.dart';
-import '../request/offres_req/offre-api.dart';
+import '../../api_models/Test_Models/Liste_TestC_Model.dart';
+import '../../api_models/Test_Models/TestPasse_Model.dart';
+import '../../request/Test_gratuit_req/TestPasse_api.dart';
+import '../../request/Test_gratuit_req/testCatégorie_api.dart';
+import '../../save/save.dart';
 
-class MesCandidatures extends StatefulWidget {
-  const MesCandidatures({Key? key}) : super(key: key);
+class ListTestPasse extends StatefulWidget {
+  const ListTestPasse({Key? key}) : super(key: key);
 
   @override
-  State<MesCandidatures> createState() => _MesCandidaturesState();
+  State<ListTestPasse> createState() => _ListTestPasseState();
 }
 
-class _MesCandidaturesState extends State<MesCandidatures> {
-  OffrePostulerModel? _offre_PostulerModel;
-  Map<int, String> q = {};
+class _ListTestPasseState extends State<ListTestPasse> {
+  TestPasse_Model? _testPasse_Model;
+  Map<int, String> T = {};
   @override
   void initState() {
     super.initState();
-    OffreAPI offreAPI = OffreAPI();
-    OffreModel? offreModel;
-    offreAPI.getData().then((value) {
-      offreModel = value as OffreModel;
-      for (int i = 0; i < offreModel!.offres!.length; i++) {
-        q[offreModel!.offres![i].id!] = offreModel!.offres![i].name!;
+    TestCatAPI testCatAPI = TestCatAPI();
+    TestsModel? testsModel;
+    testCatAPI.getData().then((value) {
+      testsModel = value as TestsModel;
+      for (int i = 0; i < testsModel!.data1!.length; i++) {
+        T[testsModel!.data1![i].id!] = testsModel!.data1![i].name!;
       }
       //qq[]=
-      print(offreModel?.toJson());
+      print(testsModel?.toJson());
     });
 
-    Offre_PostulerAPI offre_PostulerAPI = Offre_PostulerAPI();
+    TestPasseAPI testPasseAPI = TestPasseAPI();
 
-    offre_PostulerAPI.userId =
+    testPasseAPI.userId =
         SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
-    print(offre_PostulerAPI.apiUrl());
+    print(testPasseAPI.apiUrl());
 
-    offre_PostulerAPI.getData().then((value) {
-      _offre_PostulerModel = value as OffrePostulerModel;
+    testPasseAPI.getData().then((value) {
+      _testPasse_Model = value as TestPasse_Model;
 
       setState(() {});
     });
@@ -81,12 +83,12 @@ class _MesCandidaturesState extends State<MesCandidatures> {
           ),
         ),
         Expanded(
-            child: _offre_PostulerModel == null
+            child: _testPasse_Model == null
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
-                    itemCount: _offre_PostulerModel?.posts?.length,
+                    itemCount: _testPasse_Model?.tooks?.length,
                     itemBuilder: (context, pos) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -96,17 +98,17 @@ class _MesCandidaturesState extends State<MesCandidatures> {
                             height: 100,
                             child: Column(children: [
                               Text(
-                                "${q[_offre_PostulerModel?.posts?[pos].offreId]}",
+                                "${T[_testPasse_Model?.tooks?[pos].testId]}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                               Text(
-                                "score: ${_offre_PostulerModel?.posts?[pos].score}",
+                                "score: ${_testPasse_Model?.tooks?[pos].score}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                               Text(
-                                " offre postuler le: ${_offre_PostulerModel?.posts?[pos].createdAt}",
+                                "date de passer le test: ${_testPasse_Model?.tooks?[pos].createdAt}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),

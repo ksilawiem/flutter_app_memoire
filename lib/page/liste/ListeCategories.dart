@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../api_models/Categorie_Model.dart';
-import '../request/categorie_api.dart';
+import '../../api_models/Categorie_Model.dart';
+import '../../request/categorie_api.dart';
 import 'listTest.dart';
 
 class List_categories extends StatefulWidget {

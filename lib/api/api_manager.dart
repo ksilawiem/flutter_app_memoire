@@ -32,7 +32,9 @@ abstract class ApiManager {
       // } else {
 
       //   }
+      print("0" * 30);
       print(value);
+      print("0" * 30);
       data = value.data;
       json = fromJson(data);
     });

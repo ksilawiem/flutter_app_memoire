@@ -3,14 +3,14 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-import '../api_models/Offre_Models/offre_model.dart';
-import '../api_models/login_model.dart';
-import '../request/offres_req/offre-api.dart';
+import '../../api_models/Offre_Models/offre_model.dart';
+import '../../api_models/login_model.dart';
+import '../../request/offres_req/offre-api.dart';
 import 'ListeCategories.dart';
-import 'Offre_Postuler.dart';
-import 'login.dart';
-import 'profilCan.dart';
-import 'profil_recru.dart';
+import '../Offre_Postuler.dart';
+import '../login.dart';
+import '../profilCan.dart';
+import '../profil_recru.dart';
 
 class ListOffre extends StatefulWidget {
   const ListOffre({Key? key}) : super(key: key);

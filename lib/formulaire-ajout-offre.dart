@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/test.dart';
 import 'package:http/http.dart' as http;
 
+import 'page/Add_test.dart';
 import 'page/delayed_animation.dart';
 import 'request/offres_req/Add_Offre_request.dart';
 import 'request/offres_req/offre-api.dart';
@@ -242,7 +243,7 @@ class AjoutOffre extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => test(),
+                      builder: (context) => AddTest(),
                     ),
                   );
                   /* await http.post(

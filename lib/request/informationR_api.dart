@@ -9,7 +9,7 @@ class InformationRAPI extends ApiManager {
   String userId = "";
   @override
   String apiUrl() {
-    return "http://192.168.1.112:8000/api/users/$userId";
+    return "http://192.168.0.105:8000/api/users/$userId";
   }
 
   @override

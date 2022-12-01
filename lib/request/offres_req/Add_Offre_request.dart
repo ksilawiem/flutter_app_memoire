@@ -10,7 +10,7 @@ class Add_OffreAPI extends ApiManager {
 
   @override
   String apiUrl() {
-    return "http://192.168.1.112:8000/api/add-offre/user/$userId";
+    return "http://192.168.0.105:8000/api/add-offre/user/$userId";
   }
 
   @override

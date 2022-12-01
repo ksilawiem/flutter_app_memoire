@@ -132,7 +132,7 @@ class _LogInState extends State<Login> {
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: InkWell(
-                                onTap: () async {
+                                /*onTap: () async {
                                   print("88888888ppppp");
                                   LogInAPI logInAPI = LogInAPI();
                                   logInAPI.post({
@@ -156,7 +156,7 @@ class _LogInState extends State<Login> {
                                   //   "Role": "client",
                                   // "first_name": widget.email.password
                                   //  });
-                                },
+                                },*/
                                 child: FlatButton(
                                   child: Padding(
                                     padding: EdgeInsets.only(

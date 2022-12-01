@@ -1,4 +1,4 @@
-import 'package:app_flutter_memoir/page/liste_offre.dart';
+import 'package:app_flutter_memoir/page/liste/liste_offre.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/login.dart';
 

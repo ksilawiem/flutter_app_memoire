@@ -10,7 +10,7 @@ class TestAPI extends ApiManager {
 
   @override
   String apiUrl() {
-    return "http://192.168.1.112:8000/api/test/$TestId";
+    return "http://192.168.0.105:8000/api/test/$TestId";
   }
 
   @override

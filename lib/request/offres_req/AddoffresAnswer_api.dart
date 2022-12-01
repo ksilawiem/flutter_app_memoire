@@ -12,7 +12,7 @@ class Add_OffreAnswerAPI extends ApiManager {
 
   @override
   String apiUrl() {
-    return "http://192.168.1.112:8000/api/offre-answer/offre/$offreId/question/$questionId";
+    return "http://192.168.0.105:8000/api/offre-answer/offre/$offreId/question/$questionId";
   }
 
   @override

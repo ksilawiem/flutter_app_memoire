@@ -13,11 +13,13 @@ import '../request/experience_Apil.dart';
 import '../request/formation_api.dart';
 import '../request/informationC_api.dart';
 import '../request/informationR_api.dart';
-import 'ListeCategories.dart';
+import 'liste/List_Offre_Ajouter.dart';
+import 'liste/ListeCategories.dart';
 import 'Offre_Postuler.dart';
 import 'SettingPage.dart';
-import 'listTest.dart';
-import 'liste_offre.dart';
+import 'liste/listTest.dart';
+import 'liste/liste_canditats.dart';
+import 'liste/liste_offre.dart';
 import 'login.dart';
 
 class Profilerecruteur extends StatefulWidget {
@@ -86,7 +88,7 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                     height: 20,
                   ),
                   Text(
-                    'My\nProfile',
+                    'Mon profil',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -153,7 +155,7 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                               child: Center(
                                 child: Container(
                                   child: Image.asset(
-                                    'images/candidat.png',
+                                    'images/benti.jpeg',
                                     width: innerWidth * 0.45,
                                     fit: BoxFit.fitWidth,
                                   ),
@@ -347,11 +349,13 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                 ),
                 ListTile(
                   title: const Text('My candidats'),
-                  /* onTap: () {
+                  onTap: () {
                     // Update the state of the app.
-                    Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => Mes_candidatures()));
-                  },*/
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => ListOffreAjouter()));
+                  },
                 ),
                 ListTile(
                   title: const Text('catégories'),

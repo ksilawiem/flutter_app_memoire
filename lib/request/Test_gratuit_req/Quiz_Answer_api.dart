@@ -12,7 +12,7 @@ class Quiz_answerAPI extends ApiManager {
 
   @override
   String apiUrl() {
-    return "http://192.168.1.112:8000/api/quiz-question/test/$testId/question/$questionId";
+    return "http://192.168.0.105:8000/api/quiz-question/test/$testId/question/$questionId";
   }
 
   @override

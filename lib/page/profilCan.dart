@@ -11,13 +11,13 @@ import '../request/experience_Apil.dart';
 import '../request/formation_api.dart';
 import '../request/informationC_api.dart';
 import '../save/save.dart';
-import 'ListeCategories.dart';
-import 'ListeTestPassé.dart';
+import 'liste/ListeCategories.dart';
+import 'liste/ListeTestPassé.dart';
 import 'Offre_Postuler.dart';
 import 'SettingPage.dart';
 import 'edit_profil.dart';
-import 'listTest.dart';
-import 'liste_offre.dart';
+import 'liste/listTest.dart';
+import 'liste/liste_offre.dart';
 import 'login.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -138,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 20,
                   ),
                   Text(
-                    'My\nProfile',
+                    'Mon profil',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -641,7 +641,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => Mes_candidatures(
+                            builder: (context) => MesCandidatures(
                                 //    cat: '',
                                 )));
                   },
@@ -653,9 +653,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => ListTestPasse(
-                                  cat: informationModel!.firstName!.toString(),
-                                )));
+                            builder: (context) => ListTestPasse()));
                   },
                 ),
                 ListTile(
