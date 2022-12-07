@@ -98,4 +98,32 @@ abstract class ApiManager {
   }
 //
 
+  /// POST DATA TO SERVER
+  Future<AbstractJsonResource?> delet() async {
+    AbstractJsonResource? jsonList;
+    var data;
+    String? token = SecureStorage.readSecureData(SecureStorage.Token);
+    Options options = Options(
+      headers: {
+        "Accept": "application/json",
+        'Content-Type': 'application/json',
+        "authorization": "Bearer ${token}"
+      },
+    );
+
+    await dioSingleton.dio
+        .delete(apiUrl(), options: options
+            // Options(
+            //     followRedirects: false,
+            //     validateStatus: (status) {
+            //       return status < 500;
+            //     }),
+            )
+        .then((value) {
+      print(value.data);
+      data = value.data;
+      jsonList = fromJson(data);
+    });
+    return jsonList;
+  }
 }

@@ -117,7 +117,6 @@ class _List_categoriesState extends State<List_categories> {
                                                     .data![pos].id
                                                     .toString(),
                                               )));
-//ListTest(cat: _categoriesModel?.data?[pos].id,)
                                 },
                                 child: Container(
                                   height: 40,

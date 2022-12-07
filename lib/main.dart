@@ -1,11 +1,11 @@
 import 'package:app_flutter_memoir/page/liste/ListeCategories.dart';
 import 'package:app_flutter_memoir/page/SettingPage.dart';
 import 'package:app_flutter_memoir/page/login.dart';
-import 'package:app_flutter_memoir/page/test.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter_memoir/page/welcome_page.dart';
 import 'package:get_storage/get_storage.dart';
-import 'page/Add_test.dart';
+import 'page/Ajouter/Add_test.dart';
+import 'page/PasserTest.dart';
 import 'page/liste/ListeTestPassé.dart';
 import 'page/Offre_Postuler.dart';
 import 'page/liste/listTest.dart';

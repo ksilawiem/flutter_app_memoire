@@ -1,29 +1,6 @@
 import 'package:app_flutter_memoir/api/abstract_json_resource.dart';
 
 class Quiz_questionModel extends AbstractJsonResource {
-  List<Question>? question;
-
-  Quiz_questionModel({this.question});
-
-  Quiz_questionModel.fromJson(Map<String, dynamic> json) {
-    if (json['Question'] != null) {
-      question = <Question>[];
-      json['Question'].forEach((v) {
-        question!.add(new Question.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.question != null) {
-      data['Question'] = this.question!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Question {
   int? id;
   String? content;
   int? nbrAns;
@@ -31,7 +8,7 @@ class Question {
   String? createdAt;
   String? updatedAt;
 
-  Question(
+  Quiz_questionModel(
       {this.id,
       this.content,
       this.nbrAns,
@@ -39,7 +16,7 @@ class Question {
       this.createdAt,
       this.updatedAt});
 
-  Question.fromJson(Map<String, dynamic> json) {
+  Quiz_questionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     content = json['content'];
     nbrAns = json['nbr_ans'];

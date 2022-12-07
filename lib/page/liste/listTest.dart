@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../../api_models/Test_Models/Liste_TestC_Model.dart';
 import '../../request/Test_gratuit_req/testCatégorie_api.dart';
+import '../PasserTest.dart';
 
 class ListTest extends StatefulWidget {
   String cat;
@@ -93,12 +94,24 @@ class _ListTestState extends State<ListTest> {
                               Expanded(
                                   child: Column(
                                 children: [
-                                  Container(
-                                    color: Colors.blue,
-                                    height: 50,
-                                    width: 90,
-                                    child:
-                                        Center(child: Text("passer le test")),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PasserTest()));
+                                    },
+                                    child: Container(
+                                      height: 40,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Center(
+                                          child: Text("Accéder aux tests")),
+                                    ),
                                   )
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.end,

@@ -220,13 +220,6 @@ class _LogInState extends State<Login> {
                     TextButton(
                       onPressed: () async {
                         //forgot password screen
-                        await http.post(
-                            Uri.parse(
-                                'http://http://192.168.0.100:8000/api/forgetpassword/users/'),
-                            body: {
-                              "Role": "client",
-                              // "first_name": widget.email.password
-                            });
                       },
                       child: const Text(
                         'Forgot Password',
@@ -248,14 +241,6 @@ class _LogInState extends State<Login> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => Candi_recru()));
-
-                          await http.post(
-                              Uri.parse(
-                                  'http://http://192.168.0.100:8000/api/users/create/'),
-                              body: {
-                                "Role": "client",
-                                // "first_name": widget.email.password
-                              });
                         },
                         child: Text(
                           'Create new Account',

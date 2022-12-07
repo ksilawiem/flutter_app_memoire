@@ -7,7 +7,7 @@ class CategorieAPI extends ApiManager {
   String userId = "";
   @override
   String apiUrl() {
-    return "http://192.168.0.105:8000/api/categories";
+    return "http://192.168.0.102:8000/api/categories";
   }
 
   @override

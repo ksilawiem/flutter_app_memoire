@@ -22,8 +22,10 @@ class _ListTestPasseState extends State<ListTestPasse> {
   @override
   void initState() {
     super.initState();
+
     TestCatAPI testCatAPI = TestCatAPI();
     TestsModel? testsModel;
+
     testCatAPI.getData().then((value) {
       testsModel = value as TestsModel;
       for (int i = 0; i < testsModel!.data1!.length; i++) {

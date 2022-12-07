@@ -1,3 +1,4 @@
+import 'package:app_flutter_memoir/page/profil_recru.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -6,10 +7,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../api_models/Test_Models/Liste_TestC_Model.dart';
 import '../../api_models/Test_Models/TestPasse_Model.dart';
 import '../../api_models/list_user_Model.dart';
+import '../Ajouter/formulaire-ajout-offre.dart';
 import '../../request/ListUser_api.dart';
 import '../../request/Test_gratuit_req/TestPasse_api.dart';
 import '../../request/Test_gratuit_req/testCatégorie_api.dart';
 import '../../save/save.dart';
+import '../SettingPage.dart';
+import '../login.dart';
+import 'ListeCategories.dart';
+import 'liste_offre.dart';
 
 class ListCandidats extends StatefulWidget {
   const ListCandidats({Key? key}) : super(key: key);
@@ -24,22 +30,8 @@ class _ListCandidatsState extends State<ListCandidats> {
   @override
   void initState() {
     super.initState();
-    //UserAPI userAPI = UserAPI();
-    // TestsModel? testsModel;
-    /* userAPI.getData().then((value) {
-      testsModel = value as TestsModel;
-      for (int i = 0; i < testsModel!.data1!.length; i++) {
-        U[testsModel!.data1![i].id!] = testsModel!.data1![i].name!;
-      }
-      //qq[]=
-      print(testsModel?.toJson());
-    });*/
 
     UserAPI userAPI = UserAPI();
-
-    /* userAPI.userId =
-        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
-    print(userAPI.apiUrl());*/
 
     userAPI.getData().then((value) {
       _listUser_Model = value as ListUser_Model;
@@ -61,7 +53,6 @@ class _ListCandidatsState extends State<ListCandidats> {
             child: TextFormField(
               style: TextStyle(color: Colors.black),
               textAlign: TextAlign.right,
-              //validator: controller.nameValidator,controller:controller.username,
               decoration: InputDecoration(
                 icon: Icon(Icons.search_rounded),
                 hintText: " ",
@@ -121,6 +112,77 @@ class _ListCandidatsState extends State<ListCandidats> {
                       );
                     }))
       ]),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('JobSeeker'),
+            ),
+            ListTile(
+              title: const Text('offres'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => ListOffre()));
+              },
+            ),
+            ListTile(
+              title: const Text('Edit profil'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => SettingsPage()));
+              },
+            ),
+            ListTile(
+              title: const Text('Ajouter offre'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => AjoutOffre()));
+              },
+            ),
+            ListTile(
+              title: const Text('Mon profil'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => Profilerecruteur()));
+              },
+            ),
+            ListTile(
+              title: const Text('catégories'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => List_categories()));
+              },
+            ),
+            ListTile(
+              title: const Text('logout'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => Login()));
+              },
+            ),
+          ],
+        ),
+      ),
     ));
   }
 }

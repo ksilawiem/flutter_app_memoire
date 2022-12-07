@@ -1,9 +1,9 @@
+import 'package:app_flutter_memoir/page/profilCan.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../api_models/inscript_candi_model.dart';
 import '../request/inscrit_candi_api.dart';
 import 'delayed_animation.dart';
-import 'package:app_flutter_memoir/page/test.dart';
 import 'package:http/http.dart' as http;
 
 //import 'package:file_picker/file_picker.dart';
@@ -291,7 +291,7 @@ class Inscription extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => test(),
+                      builder: (context) => ProfileScreen(),
                     ),
                   );
                 },

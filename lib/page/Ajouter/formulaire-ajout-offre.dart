@@ -1,13 +1,17 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:app_flutter_memoir/page/test.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
-import 'page/Add_test.dart';
-import 'page/delayed_animation.dart';
-import 'request/offres_req/Add_Offre_request.dart';
-import 'request/offres_req/offre-api.dart';
-
+import 'Add_test.dart';
+import '../delayed_animation.dart';
+import '../../request/offres_req/Add_Offre_request.dart';
+import '../../request/offres_req/offre-api.dart';
+import 'Add_test.dart';
+import 'package:http_parser/http_parser.dart';
 //import 'package:file_picker/file_picker.dart';
 //import 'package:open_file/open_file.dart';
 
@@ -19,7 +23,7 @@ class AjoutOffre extends StatelessWidget {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController categorieController = TextEditingController();
   TextEditingController logoController = TextEditingController();
-
+  File? image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,6 +172,24 @@ class AjoutOffre extends StatelessWidget {
                     ),
                   ),
                   DelayedAnimation(
+                    delay: 3500,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter time';
+                        }
+                        return null;
+                      },
+                      controller: logoController,
+                      decoration: InputDecoration(
+                        labelText: 'Logo',
+                        labelStyle: TextStyle(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                    ),
+                  ),
+                  DelayedAnimation(
                     delay: 5500,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -182,16 +204,13 @@ class AjoutOffre extends StatelessWidget {
                         'Logo',
                       ),
                       onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles(
-                          type: FileType.custom,
-                          allowedExtensions: ['png'],
-                        );
-                        if (result == null) {
-                          return;
+                        final picker = ImagePicker();
+                        XFile? img =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        if (img != null) {
+                          image = File(img.path);
+                          print(image!.path);
                         }
-                        final file = result.files.first;
-                        print(file.name);
                       },
                     ),
                   ),
@@ -222,6 +241,8 @@ class AjoutOffre extends StatelessWidget {
                 ),
                 onPressed: () async {
                   Add_OffreAPI add_OffreAPI = Add_OffreAPI();
+
+                  // String fileName = image!.path.split('/').last;
                   add_OffreAPI.post({
                     "name": nameController.text,
                     "address": addressController.text,
@@ -230,14 +251,14 @@ class AjoutOffre extends StatelessWidget {
                     "categorie": categorieController.text,
                     "temps": tempsController.text,
                     "logo": logoController.text,
+                    /* await MultipartFile.fromFile(image!.path,
+                        filename: fileName,
+                        contentType: new MediaType('image', 'png')),*/
                     "user_id": "",
                     "updated_at": "",
                     "created_at": "",
                     "id": ""
                   }).then((value) {
-                    ///   InscriptCandiModel inscriptCandiModel =
-                    ////     InscriptCandiModel();
-                    //    inscriptCandiModel = value as InscriptCandiModel;
                     print(value);
                   });
                   Navigator.push(

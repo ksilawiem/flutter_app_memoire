@@ -1,23 +1,48 @@
 import 'package:app_flutter_memoir/api_models/Offre_Models/AddOffreQuestion_Model.dart';
 import 'package:flutter/material.dart';
 
-import '../request/offres_req/AddOffre_Question_api.dart';
-import '../request/offres_req/AddoffresAnswer_api.dart';
+import '../../request/offres_req/AddOffre_Question_api.dart';
+import '../../request/offres_req/AddOffre_Question_api.dart';
+import '../../request/offres_req/AddoffresAnswer_api.dart';
+import '../api_models/Test_Models/Quiz_questionModel.dart';
+import '../api_models/Test_Models/quiz-answer_Model.dart';
+import '../request/Test_gratuit_req/Quiz_Answer_api.dart';
+import '../request/Test_gratuit_req/Quiz_Question_api.dart';
+import '../save/save.dart';
 
-class AddTest extends StatefulWidget {
-  const AddTest({Key? key}) : super(key: key);
+class PasserTest extends StatefulWidget {
+  const PasserTest({Key? key}) : super(key: key);
 
   @override
-  State<AddTest> createState() => _AddTestState();
+  State<PasserTest> createState() => _PasserTestState();
 }
 
-class _AddTestState extends State<AddTest> {
-  AddOffreQuestionModel? _addOffreQuestionModel;
+class _PasserTestState extends State<PasserTest> {
+  Quiz_questionModel? _quiz_questionModel;
+  Quiz_answerModel? _quiz_answerModel;
   @override
   void initState() {
     super.initState();
-    print("Add_OffreQuestion_API");
-    Add_OffreQuestion_API add_OffreQuestion_API = Add_OffreQuestion_API();
+    Quiz_QuestionAPI quiz_QuestionAPI = Quiz_QuestionAPI();
+    quiz_QuestionAPI.questionId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+    quiz_QuestionAPI.getData().then((value) {
+      _quiz_questionModel = value as Quiz_questionModel;
+
+      q1.text = _quiz_questionModel!.content!;
+    });
+    Quiz_answerAPI quiz_answerAPI = Quiz_answerAPI();
+    quiz_answerAPI.testId =
+        SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
+
+    quiz_answerAPI.getData().then((value) {
+      _quiz_answerModel = value as Quiz_answerModel;
+
+      ans1.text = "${_quiz_answerModel!.answer?[0].content}";
+      ans2.text = "${_quiz_answerModel!.answer?[1].content}";
+
+      ans3.text = "${_quiz_answerModel!.answer?[2].content}";
+    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -32,31 +57,25 @@ class _AddTestState extends State<AddTest> {
   Widget build(BuildContext context) {
     return Scaffold(
         //resizeToAvoidBottomPadding: false, // keyboard will cover floating elements
-        appBar: AppBar(title: Text('Add Question')),
+        appBar: AppBar(title: Text('Passer le test')),
         body: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
+              TextField(
                 controller: q1,
                 decoration: InputDecoration(
-                  labelText: 'Entrer Question',
+                  labelText: 'Question',
                   labelStyle: TextStyle(
                     color: Colors.grey[400],
                   ),
                 ),
                 // The validator receives the text that the user has entered.
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your question';
-                  }
-                  return null;
-                },
               ),
               Row(children: [
                 Expanded(
-                    child: TextFormField(
+                    child: TextField(
                   controller: ans1,
                   decoration: InputDecoration(
                     labelText: 'Answer 1',
@@ -64,12 +83,6 @@ class _AddTestState extends State<AddTest> {
                       color: Colors.grey[400],
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter answer';
-                    }
-                    return null;
-                  },
                 )),
                 Checkbox(
                   onChanged: (v) {
@@ -81,7 +94,7 @@ class _AddTestState extends State<AddTest> {
               ]),
               Row(children: [
                 Expanded(
-                    child: TextFormField(
+                    child: TextField(
                   controller: ans2,
                   decoration: InputDecoration(
                     labelText: 'Answer 2',
@@ -89,12 +102,6 @@ class _AddTestState extends State<AddTest> {
                       color: Colors.grey[400],
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter answer';
-                    }
-                    return null;
-                  },
                 )),
                 Checkbox(
                   onChanged: (v) {
@@ -106,7 +113,7 @@ class _AddTestState extends State<AddTest> {
               ]),
               Row(children: [
                 Expanded(
-                    child: TextFormField(
+                    child: TextField(
                   controller: ans3,
                   decoration: InputDecoration(
                     labelText: 'Answer 3',
@@ -114,12 +121,6 @@ class _AddTestState extends State<AddTest> {
                       color: Colors.grey[400],
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter answer';
-                    }
-                    return null;
-                  },
                 )),
                 Checkbox(
                   onChanged: (v) {
@@ -133,35 +134,9 @@ class _AddTestState extends State<AddTest> {
                 padding:
                     EdgeInsets.only(top: 15, bottom: 8, left: 120, right: 10),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Add_OffreQuestion_API add_offreQuestion_API =
-                        Add_OffreQuestion_API();
-                    add_offreQuestion_API.offreId = "";
-                    Map<String, dynamic> data = {"q": q1.text};
-                    add_offreQuestion_API.post(data).then((value) {
-                      AddOffreQuestionModel v = value as AddOffreQuestionModel;
-
-                      Add_OffreAnswerAPI add_offreAnswerAPI =
-                          Add_OffreAnswerAPI();
-
-                      add_offreAnswerAPI.offreId = "";
-                      add_offreAnswerAPI.questionId = v.question!.id.toString();
-                      Map<String, dynamic> data2 = {
-                        "ans": {"an1": ans1.text, "v": true},
-                      };
-
-                      add_offreAnswerAPI.post(data2).then((value) {});
-                    }); // Validate returns true if th.e form is valid, or false otherwise.
-                    /* if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
-                    }*/
-                  },
+                  onPressed: () {},
                   child: Text(
-                    'submit',
+                    'Valider',
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       color: Colors.white,

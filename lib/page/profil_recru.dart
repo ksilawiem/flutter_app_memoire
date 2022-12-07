@@ -1,24 +1,13 @@
-import 'package:app_flutter_memoir/api_models/Profil_Models/Domaine_model.dart';
-import 'package:app_flutter_memoir/api_models/Profil_Models/Formation_Model.dart';
-import 'package:app_flutter_memoir/api_models/Profil_Models/exp%C3%A9rience_Model.dart';
-import 'package:app_flutter_memoir/formulaire-ajout-offre.dart';
+import 'package:app_flutter_memoir/page/Ajouter/formulaire-ajout-offre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../api_models/Profil_Models/Formation_Model.dart';
 import '../api_models/infoRecruteur_Mole.dart';
-import '../api_models/Profil_Models/informationCandidat_Model.dart';
-import '../request/Competence_api.dart';
-import '../request/experience_Apil.dart';
-import '../request/formation_api.dart';
-import '../request/informationC_api.dart';
+
 import '../request/informationR_api.dart';
 import 'liste/List_Offre_Ajouter.dart';
 import 'liste/ListeCategories.dart';
-import 'Offre_Postuler.dart';
 import 'SettingPage.dart';
-import 'liste/listTest.dart';
-import 'liste/liste_canditats.dart';
 import 'liste/liste_offre.dart';
 import 'login.dart';
 
@@ -328,7 +317,7 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                   },
                 ),
                 ListTile(
-                  title: const Text('Settings'),
+                  title: const Text('Edit profil'),
                   onTap: () {
                     // Update the state of the app.
                     Navigator.push(
@@ -348,7 +337,7 @@ class _ProfilerecruteurState extends State<Profilerecruteur> {
                   },
                 ),
                 ListTile(
-                  title: const Text('My candidats'),
+                  title: const Text('Mes offres'),
                   onTap: () {
                     // Update the state of the app.
                     Navigator.push(

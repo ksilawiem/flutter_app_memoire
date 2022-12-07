@@ -1,6 +1,6 @@
 import 'package:app_flutter_memoir/api/abstract_json_resource.dart';
 
-class Quiz_answerModel extends AbstractJsonResource{
+class Quiz_answerModel extends AbstractJsonResource {
   List<Answer>? answer;
 
   Quiz_answerModel({this.answer});
