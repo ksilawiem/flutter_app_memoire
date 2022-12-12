@@ -653,7 +653,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => ListTestPasse()));
+                            builder: (context) => ListTestPasse(
+                                  catId: 1,
+                                )));
                   },
                 ),
                 ListTile(

@@ -7,7 +7,8 @@ import '../../request/offres_req/AddoffresAnswer_api.dart';
 import '../liste/liste_offre.dart';
 
 class AddTest extends StatefulWidget {
-  const AddTest({Key? key}) : super(key: key);
+  AddTest({Key? key, required this.idOffre}) : super(key: key);
+  int idOffre;
 
   @override
   State<AddTest> createState() => _AddTestState();
@@ -136,7 +137,7 @@ class _AddTestState extends State<AddTest> {
                   onPressed: () {
                     Add_OffreQuestion_API add_offreQuestion_API =
                         Add_OffreQuestion_API();
-                    add_offreQuestion_API.offreId = "71";
+                    add_offreQuestion_API.offreId = widget.idOffre.toString();
                     print("*" * 50);
                     print(add_offreQuestion_API.apiUrl());
                     print("*" * 50);
@@ -148,7 +149,7 @@ class _AddTestState extends State<AddTest> {
                       Add_OffreAnswerAPI add_offreAnswerAPI =
                           Add_OffreAnswerAPI();
 
-                      add_offreAnswerAPI.offreId = "";
+                      add_offreAnswerAPI.offreId = widget.idOffre.toString();
                       add_offreAnswerAPI.questionId = "";
 
                       add_offreAnswerAPI.questionId = v.question!.id.toString();
@@ -156,22 +157,21 @@ class _AddTestState extends State<AddTest> {
                       print(add_offreAnswerAPI.apiUrl());
                       print("*" * 50);
                       Map<String, dynamic> data2 = {
-                        "content": ans1.text,
-                        "valid": ch1 ? 1 : 0
+                        "content": ans1.text, "valid": ch1 ? 1 : 0
                       };
 
                       add_offreAnswerAPI.post(data2).then((value) {});
 
                       Map<String, dynamic> data3 = {
                         "content": ans2.text,
-                        "valid": ch2 ? 1 : 0
+                    "valid": ch2 ? 1 : 0
                       };
 
                       add_offreAnswerAPI.post(data3).then((value) {});
 
                       Map<String, dynamic> data4 = {
                         "content": ans3.text,
-                        "valid": ch3 ? 1 : 0
+                      "valid": ch3 ? 1 : 0
                       };
 
                       add_offreAnswerAPI.post(data4).then((value) {});
@@ -189,12 +189,12 @@ class _AddTestState extends State<AddTest> {
     add_OffreQuestion_API.post({"content": ).then((value) {
 
     });*/
-                    Navigator.push(
+                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ListOffre(),
+                         builder: (context) => ListOffre(),
                       ),
-                    );
+                     );
                   },
                   child: Text(
                     'submit',

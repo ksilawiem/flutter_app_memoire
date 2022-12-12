@@ -1,7 +1,9 @@
 import 'package:app_flutter_memoir/page/profilCan.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import '../api_models/Profil_Models/verifEmail_Model.dart';
 import '../api_models/inscript_candi_model.dart';
+import '../request/VerifEmail_api.dart';
 import '../request/inscrit_candi_api.dart';
 import 'delayed_animation.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +23,8 @@ class Inscription extends StatelessWidget {
   TextEditingController cityController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    VerifEmail_Model? _verifEmail_Model;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -265,6 +269,12 @@ class Inscription extends StatelessWidget {
                   ),*/
                 ),
                 onPressed: () async {
+    VerifEmailAPI verifEmailAPI = VerifEmailAPI();
+    verifEmailAPI.getData().then((value) {
+      _verifEmail_Model = value as VerifEmail_Model;
+    }
+    );
+
                   InsCAPI insCAPI = InsCAPI();
                   insCAPI.post({
                     "email": EmailController.text,
@@ -303,32 +313,3 @@ class Inscription extends StatelessWidget {
     );
   }
 }
-
-/*class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
-  @override
-  _LoginFormState createState() => _LoginFormState();
-}*/
-
-/*class _LoginFormState extends State<LoginForm> {
-  var _obscureText = true;
-  TextEditingController FirstNameController = TextEditingController();
-  TextEditingController LastNameController = TextEditingController();
-  TextEditingController EmailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController AdresseController = TextEditingController();
-  TextEditingController VilleController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
-      child: Column(children: []),
-    );
-  }
-}*/

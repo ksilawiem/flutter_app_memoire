@@ -4,19 +4,19 @@ import 'package:app_flutter_memoir/api_models/Test_Models/Quiz_questionModel.dar
 
 import '../../api/abstract_json_resource.dart';
 import '../../api/api_manager.dart';
+import '../../api_models/Test_Models/QuestionTest_Model.dart';
 import '../../api_models/Test_Models/quiz-answer_Model.dart';
 
-class Quiz_answerAPI extends ApiManager {
+class QuestionTestAPI extends ApiManager {
   String testId = "";
-  String questionId = "";
 
   @override
   String apiUrl() {
-    return "http://192.168.0.113:8000/api/quiz-answer/test/$testId/question/$questionId";
+    return "http://192.168.0.113:8000/api/quiz-question/test/$testId";
   }
 
   @override
   AbstractJsonResource fromJson(data) {
-    return Quiz_answerModel.fromJson(data);
+    return QuestionTest_Model.fromJson(data);
   }
 }

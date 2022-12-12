@@ -1,11 +1,6 @@
-import 'package:app_flutter_memoir/api_models/Offre_Models/AddOffreQuestion_Model.dart';
 import 'package:flutter/material.dart';
-
-import '../../request/offres_req/AddOffre_Question_api.dart';
-import '../../request/offres_req/AddOffre_Question_api.dart';
-import '../../request/offres_req/AddoffresAnswer_api.dart';
-import '../api_models/Test_Models/Quiz_questionModel.dart';
-import '../api_models/Test_Models/quiz-answer_Model.dart';
+import '../api_models/Test_Models/AnswerTest_Model.dart';
+import '../api_models/Test_Models/QuestionTest_Model.dart';
 import '../request/Test_gratuit_req/Quiz_Answer_api.dart';
 import '../request/Test_gratuit_req/Quiz_Question_api.dart';
 import '../save/save.dart';
@@ -18,8 +13,8 @@ class PasserTest extends StatefulWidget {
 }
 
 class _PasserTestState extends State<PasserTest> {
-  Quiz_questionModel? _quiz_questionModel;
-  Quiz_answerModel? _quiz_answerModel;
+  QuestionTest_Model? _quiz_questionModel;
+  AnswerTest_Model? _quiz_answerModel;
   @override
   void initState() {
     super.initState();
@@ -27,16 +22,16 @@ class _PasserTestState extends State<PasserTest> {
     quiz_QuestionAPI.questionId =
         SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
     quiz_QuestionAPI.getData().then((value) {
-      _quiz_questionModel = value as Quiz_questionModel;
+      _quiz_questionModel = value as QuestionTest_Model;
 
-      q1.text = _quiz_questionModel!.content!;
+      q1.text = "${_quiz_questionModel!.question?[0].content}";
     });
     Quiz_answerAPI quiz_answerAPI = Quiz_answerAPI();
     quiz_answerAPI.testId =
         SecureStorage.readSecureDataINT(SecureStorage.userId).toString();
 
     quiz_answerAPI.getData().then((value) {
-      _quiz_answerModel = value as Quiz_answerModel;
+      _quiz_answerModel = value as AnswerTest_Model;
 
       ans1.text = "${_quiz_answerModel!.answer?[0].content}";
       ans2.text = "${_quiz_answerModel!.answer?[1].content}";

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../../api_models/Offre_Models/offre_model.dart';
 import '../../api_models/login_model.dart';
 import '../../request/offres_req/offre-api.dart';
+import '../../request/offres_req/postuler_offre_api.dart';
+import '../PasserTestOffre.dart';
 import 'ListeCategories.dart';
 import '../Offre_Postuler.dart';
 import '../login.dart';
@@ -22,12 +24,12 @@ class ListOffre extends StatefulWidget {
 class _ListOffreState extends State<ListOffre> {
   List<ListOffreModel> list = [];
   OffreModel? _offreModel;
-
+  OffreAPI offreAPI = OffreAPI();
   @override
   void initState() {
     super.initState();
     print("OffreAPI");
-    OffreAPI offreAPI = OffreAPI();
+
     offreAPI.getData().then((value) {
       _offreModel = value as OffreModel;
       print("OffreAPI");
@@ -117,16 +119,15 @@ class _ListOffreState extends State<ListOffre> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    "${_offreModel?.offres?[index].categorie}"),
+                                    "Offre : ${_offreModel?.offres?[index].name}"),
                                 Text(
-                                    "post by : ${_offreModel?.offres?[index].name}"),
-                                Text(" ${_offreModel?.offres?[index].address}"),
+                                    "Adresse: ${_offreModel?.offres?[index].address}"),
                                 Text(
-                                    "category ${_offreModel?.offres?[index].categorie}"),
+                                    "Categorie: ${_offreModel?.offres?[index].categorie}"),
                                 Row(
                                   children: [
                                     Text(
-                                        "company ${_offreModel?.offres?[index].categorie}"),
+                                        "Télephone: ${_offreModel?.offres?[index].telefone}"),
                                     SizedBox(
                                       width: 4,
                                     ),
@@ -156,7 +157,30 @@ class _ListOffreState extends State<ListOffre> {
                                                 side: BorderSide(
                                                     color:
                                                         Colors.blueAccent)))),
-                                    onPressed: () => null)
+                                    onPressed: () async {
+                                      PostulerAPI postulerAPI = PostulerAPI();
+                                      postulerAPI.offreId=_offreModel!.offres![index].id.toString();
+                                   postulerAPI.userId=_offreModel!.offres![index].userId.toString();
+                                      postulerAPI.post({
+                                        "startedAt": "2008-11-11 13:23:44",
+                                      }).then((value) {
+                                        offreAPI.getData().then((value) {
+                                          _offreModel = value as OffreModel;
+                                          print("OffreAPI");
+                                          print(_offreModel?.toJson());
+                                          setState(() {});
+                                        });
+                                      });
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PasserTestOffre(
+                                            offre: _offreModel!.offres![index],
+                                          ),
+                                        ),
+                                      );
+                                    })
                               ],
                             ),
                           ),

@@ -4,9 +4,11 @@ import 'package:app_flutter_memoir/api_models/Test_Models/Quiz_questionModel.dar
 
 import '../../api/abstract_json_resource.dart';
 import '../../api/api_manager.dart';
+import '../../api_models/Test_Models/AnswerTest_Model.dart';
+import '../../api_models/Test_Models/QuestionTest_Model.dart';
 import '../../api_models/Test_Models/quiz-answer_Model.dart';
 
-class Quiz_answerAPI extends ApiManager {
+class AnswerTestAPI extends ApiManager {
   String testId = "";
   String questionId = "";
 
@@ -17,6 +19,6 @@ class Quiz_answerAPI extends ApiManager {
 
   @override
   AbstractJsonResource fromJson(data) {
-    return Quiz_answerModel.fromJson(data);
+    return AnswerTest_Model.fromJson(data);
   }
 }

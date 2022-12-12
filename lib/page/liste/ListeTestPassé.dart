@@ -10,8 +10,8 @@ import '../../request/Test_gratuit_req/testCatégorie_api.dart';
 import '../../save/save.dart';
 
 class ListTestPasse extends StatefulWidget {
-  const ListTestPasse({Key? key}) : super(key: key);
-
+  ListTestPasse({Key? key, required this.catId}) : super(key: key);
+  int catId;
   @override
   State<ListTestPasse> createState() => _ListTestPasseState();
 }
@@ -24,12 +24,25 @@ class _ListTestPasseState extends State<ListTestPasse> {
     super.initState();
 
     TestCatAPI testCatAPI = TestCatAPI();
+    testCatAPI.categorieId = 1.toString(); //.catId.toString();
     TestsModel? testsModel;
+    print("-----" * 20);
 
+    print(testCatAPI.apiUrl());
+    print("-----" * 20);
     testCatAPI.getData().then((value) {
       testsModel = value as TestsModel;
+
+      print("-----" * 20);
+
+      print(testsModel?.toJson());
+      print("-----" * 20);
       for (int i = 0; i < testsModel!.data1!.length; i++) {
         T[testsModel!.data1![i].id!] = testsModel!.data1![i].name!;
+        print("-----" * 20);
+
+        print("${testsModel!.data1![i].id}-----${testsModel!.data1![i].name}");
+        print("-----" * 20);
       }
       //qq[]=
       print(testsModel?.toJson());

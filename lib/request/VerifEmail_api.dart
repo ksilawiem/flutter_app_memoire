@@ -11,7 +11,7 @@ class VerifEmailAPI extends ApiManager {
 
   @override
   String apiUrl() {
-    return "http://192.168.0.102:8000/api/sendMail/users/$userId";
+    return "http://192.168.0.113:8000/api/sendMail/users/$userId";
   }
 
   @override

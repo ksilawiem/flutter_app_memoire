@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
+import '../../api_models/Offre_Models/Add_offre_Model.dart';
 import 'Add_test.dart';
 import '../delayed_animation.dart';
 import '../../request/offres_req/Add_Offre_request.dart';
@@ -260,13 +261,17 @@ class AjoutOffre extends StatelessWidget {
                     "id": ""
                   }).then((value) {
                     print(value);
+                    Add_OffreModel add_offreModel = value as Add_OffreModel;
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            AddTest(idOffre: add_offreModel.offre!.id!),
+                      ),
+                    );
                   });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddTest(),
-                    ),
-                  );
+
                   /* await http.post(
                       Uri.parse('http://localhost:8000/api/users/create/'),
                       body: {

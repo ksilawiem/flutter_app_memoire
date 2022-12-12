@@ -1,3 +1,5 @@
+
+/*
 import 'package:app_flutter_memoir/page/profil_recru.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,24 +19,24 @@ import '../login.dart';
 import 'ListeCategories.dart';
 import 'liste_offre.dart';
 
-class ListCandidats extends StatefulWidget {
-  const ListCandidats({Key? key}) : super(key: key);
 
+class UserOffre extends StatefulWidget {
+    UserOffre({Key? key,this.id}) : super(key: key);
+int id;
   @override
-  State<ListCandidats> createState() => _ListCandidatsState();
+  State<UserOffre> createState() => _ListCandidatsState();
 }
 
-class _ListCandidatsState extends State<ListCandidats> {
-  ListUser_Model? _listUser_Model;
-  Map<int, String> U = {};
+class _ListCandidatsState extends State<UserOffre> {
+  UserOffre_Model? _userOffre_Model;
   @override
   void initState() {
     super.initState();
 
     UserAPI userAPI = UserAPI();
-
+//widget.id
     userAPI.getData().then((value) {
-      _listUser_Model = value as ListUser_Model;
+      
 
       setState(() {});
     });
@@ -76,57 +78,47 @@ class _ListCandidatsState extends State<ListCandidats> {
           ),
         ),
         Expanded(
-            child: _listUser_Model == null
+            child: _userOffre_Model == null
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
-                    itemCount: _listUser_Model?.users?.length,
+                    itemCount:_userOffre_Model?.users?.length,
                     itemBuilder: (context, pos) {
-
-                      if(_listUser_Model?.users?[pos].role?.toLowerCase()=="condidat".toLowerCase()){
-
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              print(_listUser_Model?.users?[pos].id);
-
-                              //UserOffre(id:_listUser_Model?.users?[pos].id)
-                            },
-                            child: Card(
-                              elevation: 8,
-                              child: Container(
-                                height: 100,
-                                child: Column(children: [
-                                  Text(
-                                    "${_listUser_Model?.users?[pos].firstName}"
-                                        "${_listUser_Model?.users?[pos].lastName}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                  /* Text(
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            print(_userOffre_Model?.users?[pos].id);
+                          },
+                          child: Card(
+                            elevation: 8,
+                            child: Container(
+                              height: 100,
+                              child: Column(children: [
+                                Text(
+                                  "${_userOffre_Model?.users?[pos].firstName}"
+                                  "${_userOffre_Model?.users?[pos].lastName}",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                /* Text(
                                   "${_listUser_Model?.users?[pos].lastName}",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold, fontSize: 16),
                                 ),*/
-                                  Text(
-                                    "Email: ${_listUser_Model?.users?[pos].email}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                ]),
-                              ),
+                                Text(
+                                  "Email: ${_userOffre_Model?.users?[pos].email}",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                              ]),
                             ),
                           ),
-                        );
-                      }else{
-                        return SizedBox();
-                      }
-
-
+                        ),
+                      );
                     }))
       ]),
       drawer: Drawer(
@@ -203,3 +195,4 @@ class _ListCandidatsState extends State<ListCandidats> {
     ));
   }
 }
+*/
